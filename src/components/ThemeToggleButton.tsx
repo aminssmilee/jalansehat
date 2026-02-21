@@ -1,23 +1,42 @@
 "use client";
 
-import { MoonStar, Sun } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
 
 const ThemeToggleButton = () => {
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) return <div className="h-9 w-9 rounded-xl" />;
+
+  const isDark = theme === "dark";
 
   return (
     <button
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="flex cursor-pointer items-center">
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      aria-label="Toggle theme"
+      className={cn(
+        "relative h-9 w-9 rounded-xl flex items-center justify-center transition-all duration-200",
+        "hover:bg-muted text-muted-foreground hover:text-foreground"
+      )}
+    >
       <Sun
-        size={28}
-        className="-rotate-90 opacity-100 transition-all duration-300 dark:rotate-0 dark:opacity-0"
+        size={18}
+        className={cn(
+          "absolute transition-all duration-300",
+          isDark ? "opacity-0 rotate-90 scale-0" : "opacity-100 rotate-0 scale-100"
+        )}
       />
-
-      <MoonStar
-        size={28}
-        className="absolute -rotate-90 opacity-0 transition-all duration-300 dark:rotate-0 dark:opacity-100"
+      <Moon
+        size={18}
+        className={cn(
+          "absolute transition-all duration-300",
+          isDark ? "opacity-100 rotate-0 scale-100" : "opacity-0 -rotate-90 scale-0"
+        )}
       />
     </button>
   );
