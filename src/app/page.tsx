@@ -169,7 +169,7 @@ export default function HomePage() {
                       <Camera className="h-6 w-6 text-primary" />
                     </div>
                     <div>
-                      <div className="font-semibold text-sm">Laporan Baru</div>
+                      <div className="font-semibold text-sm">Laporan new</div>
                       <div className="text-xs text-muted-foreground">Jl. Sudirman No.45</div>
                     </div>
                     <Badge className="ml-auto bg-amber-100 text-amber-700 border-0 text-xs dark:bg-amber-900/30 dark:text-amber-400">
